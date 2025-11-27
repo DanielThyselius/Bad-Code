@@ -1,4 +1,5 @@
 ﻿// This is NOT how you should be coding!
+// Well, now it looks a bit better, no?
 
 namespace InvoiceSender;
 

@@ -1,0 +1,13 @@
+name: test-enviroments
+on: workflow_dispatch
+jobs:
+  print-my-variable:
+    runs-on: ubuntu-latest
+    # Define GITHUB environment to use
+    environment: Test
+    # Declare environment variables
+    env:
+      MIN_VARIABEL: ${{ vars.MIN_VARIABEL }} 
+    steps:
+      - run: echo "${{ vars.MIN_VARIABEL }}"
+      - run: echo $MIN_VARIABEL

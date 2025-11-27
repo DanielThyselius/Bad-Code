@@ -1,0 +1,28 @@
+name: ci-cd
+on: 
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+# Built, test, deploy
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      
+      # TODO: what do do with output?
+      - run: dotnet test
+
+  # This should probably be only a delivery?
+  # Or maybe move this to another workflow and trigger on merge?
+  deploy:
+    needs: build-and-test
+    if: success()
+    runs-on: ubuntu-latest
+    environment: Test
+    env: 
+      SITE_URL: ${{ vars.SITE_URL }}
+    steps:
+      - run: echo "deploying to $SITE_URL"
